@@ -5,7 +5,7 @@ LABEL maintainer="mdimai666@mail.ru"
 
 WORKDIR /var/www/node1
 COPY package.json .
-RUN npm install    
+RUN npm i
 COPY . .
 
 EXPOSE 3000
