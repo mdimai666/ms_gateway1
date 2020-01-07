@@ -1,0 +1,24 @@
+extends layout
+
+block content
+
+  .container
+    .jumbotron
+      h1 Welcome to #{title}
+      
+      .alert.alert-info Worked!
+
+      pre 
+
+
+block scripts
+  script.
+    $(document).ready(()=>{
+      var json = !{data}
+      $('pre').html(syntaxHighlight(json))
+    })
+
+    
+
+
+  
