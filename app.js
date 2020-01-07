@@ -3,7 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var colors = require('colors');
+require('colors');
+require('dotenv').config()
+const Gateway = require('micromq/gateway');
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -13,6 +16,33 @@ var app = express();
 console.log(`                               `.bgBlack.green)
 console.log(`         EXPRESS START         `.bgBlack.green)
 console.log(`                               `.bgBlack.green)
+
+// импортируем класс Gateway из раннее установленного пакета micromq
+
+
+// создаем экземпляр класса Gateway
+const gateway = new Gateway({
+  // названия микросервисов, к которым мы будем обращаться
+  microservices: ['service1', 'service2'],
+  // настройки rabbitmq
+  rabbit: {
+    // ссылка для подключения к rabbitmq (default: amqp://guest:guest@localhost:5672)
+    url: process.env.RABBIT_URL,
+  },
+});
+
+app.use(gateway.middleware());
+
+// создаем два эндпоинта /friends & /status на метод GET
+app.all(['/service1', '/status1'], async (req, res) => {
+  // делегируем запрос в микросервис 
+  await res.delegate('service1');
+});
+
+app.all(['/service2', '/status2'], async (req, res) => {
+  // делегируем запрос в микросервис 
+  await res.delegate('service2');
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,12 +58,12 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

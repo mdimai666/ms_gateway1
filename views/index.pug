@@ -7,7 +7,16 @@ block content
       h2 Welcome to Express
       h1.text-primary.text-uppercase(style="font-size:5em") GETWAY
       
-      .alert.alert-info Worked! 
+      .alert.alert-info
+        h3 service1 - 
+          span#status1
+            i.fa.fa-cog.fa-spin
+      .alert.alert-info
+        h3 service2 - 
+          span#status2
+            i.fa.fa-cog.fa-spin
+
+      
 
       pre.maxHeightLimit 
 
@@ -17,4 +26,16 @@ block scripts
     $(document).ready(()=>{
       var json = !{data}
       $('pre').html(syntaxHighlight(json))
+
+      function getStatus(eid,path){
+        $.get(path, data => {
+          console.log(data)
+          $(eid).html(data.text || data)
+        }).catch(err => {
+          $(eid).html('error - ' + err.status + ' ' + err.statusText)
+        })
+      }
+
+      getStatus('#status1', '/status1')
+      getStatus('#status2', '/status2')
     })
