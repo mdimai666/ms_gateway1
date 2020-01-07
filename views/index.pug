@@ -4,11 +4,12 @@ block content
 
   .container
     .jumbotron
-      h1 Welcome to #{title}
+      h2 Welcome to Express
+      h1.text-primary.text-uppercase(style="font-size:5em") GETWAY
       
-      .alert.alert-info Worked!
+      .alert.alert-info Worked! 
 
-      pre 
+      pre.maxHeightLimit 
 
 
 block scripts
@@ -17,8 +18,3 @@ block scripts
       var json = !{data}
       $('pre').html(syntaxHighlight(json))
     })
-
-    
-
-
-  

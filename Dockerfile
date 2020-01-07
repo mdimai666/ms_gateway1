@@ -1,4 +1,3 @@
-# FROM node:6.11.5    
 FROM node:12.14
 
 LABEL maintainer="mdimai666@mail.ru"

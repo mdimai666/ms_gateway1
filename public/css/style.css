@@ -1,27 +1,38 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font   : 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
+
 a {
   color: #00B7FF;
 }
+
 pre {
   outline: 1px solid #ccc;
   padding: 5px;
-  margin: 5px;
+  margin : 5px;
 }
+
+.maxHeightLimit {
+  max-height: 400px;
+}
+
 .string {
   color: green;
 }
+
 .number {
   color: darkorange;
 }
+
 .boolean {
   color: blue;
 }
+
 .null {
   color: magenta;
 }
+
 .key {
   color: red;
 }
