@@ -6,6 +6,18 @@ block content
     .jumbotron
       h2 Welcome to Express
       h1.text-primary.text-uppercase(style="font-size:5em") GETWAY
+
+      .card
+        .card-body.p-1
+          b isConnectedToRabbit = 
+            span(style="color:"+(isConnectedToRabbit?"green":"red") ) #{isConnectedToRabbit}
+
+          button#btn_restart1.btn.btn-primary.float-right
+            i.fa.fa-restart
+            | Restart
+
+      p
+      p
       
       .alert.alert-info
         h3 service1 - 
@@ -38,4 +50,10 @@ block scripts
 
       getStatus('#status1', '/status1')
       getStatus('#status2', '/status2')
+
+      $('#btn_restart1').click(()=>{
+          $('.container').first().html('Restarting...')
+          $.post('/restart')
+          setTimeout(()=>location.reload(), 500)
+      })
     })

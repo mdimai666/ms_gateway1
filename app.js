@@ -33,6 +33,13 @@ const gateway = new Gateway({
 
 app.use(gateway.middleware());
 
+let isConnectedToRabbit = () => !!gateway.connection;
+
+app.use((req,res,next)=>{
+  req.isConnectedToRabbit = isConnectedToRabbit;
+  next();
+})
+
 // создаем два эндпоинта /friends & /status на метод GET
 app.all(['/service1', '/status1'], async (req, res) => {
   // делегируем запрос в микросервис 
@@ -56,6 +63,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+app.post('/restart', (req,res)=>{
+  // res.send('OK');
+  console.warn('/restart')
+  // restartSelf();
+  process.exit();
+})
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
