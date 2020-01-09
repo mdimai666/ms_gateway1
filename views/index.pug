@@ -40,11 +40,11 @@ block scripts
       $('pre').html(syntaxHighlight(json))
 
       function getStatus(eid,path){
-        $.get(path, data => {
+        $Get(path, data => {
           console.log(data)
           $(eid).html(data.text || data)
-        }).catch(err => {
-          $(eid).html('error - ' + err.status + ' ' + err.statusText)
+        }, err => {
+          $(eid).html('error - ' + err)
         })
       }
 

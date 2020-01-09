@@ -19,3 +19,19 @@ function syntaxHighlight(json) {
         return '<span class="' + cls + '">' + match + '</span>';
     });
 }
+
+function $Get(path, callback, err) {
+    $.ajax({
+        type: "Get",
+        url: path,
+        // data: data,
+        timeout: 1000,
+    }).done(function(data){
+        if(callback) callback(data)
+    }).fail(function(jqXHR, textStatus, errorThrown){
+        // if (textStatus === "timeout") {
+            //do something on timeout
+        // }
+        if(err) err(textStatus)
+    });
+}

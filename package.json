@@ -5,9 +5,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "dockerbuild": "pwsh docker-build.ps1",
-    "rundocker": "pwsh docker-run.ps1",
-    "pm2": "node_modules/.bin/pm2 start bin/www",
-    "kill": "node_modules/.bin/pm2 kill"
+    "rundocker": "pwsh docker-run.ps1"
   },
   "dependencies": {
     "colors": "^1.4.0",
