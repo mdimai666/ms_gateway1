@@ -17,6 +17,6 @@
     "json-stringify-safe": "^5.0.1",
     "micromq": "^3.0.2",
     "morgan": "~1.9.1",
-    "pug": "^2.0.4"
+    "pug": "^3.0.1"
   }
 }
